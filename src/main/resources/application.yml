@@ -1,0 +1,45 @@
+
+#https://github.com/spring-projects/spring-boot/blob/v2.4.4/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/kafka/KafkaProperties.java
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#     value.serializer
+
+    
+#   producer:
+#     client.id: An id string to pass to the server when making requests to track the source of requests 
+#     acks: 0    
+#       The producer will not wait for any acknowledgment from the server at all. 
+#       The offset given back for each record will always be set to -1 and and the retries configuration will not take effect)
+#     acks: 1 
+#       the leader will write the record to its local log but will respond without awaiting full acknowledgement from all followers.  
+#     acks: all or -1
+#       This means the leader will wait for the full set of in-sync replicas to acknowledge the record. 
+#       This guarantees that the record will not be lost as long as at least one in-sync replica remains alive.    
+#
+
+#     key-serializer
+#     value-serializer
+#     buffer.memory: total bytes of memory the producer can use to buffer records waiting to be sent to the server
+#     compression.type:  none(default), gzip, snappy, lz4, or zstd.  Compression is of full batches of data
+#     retries: default is 2147483647
+#         1. Allowing retries without setting max.in.flight.requests.per.connection to 1 will potentially change the ordering of records
+#         2. Users should generally prefer to leave this config unset and instead use delivery.timeout.ms to control retry behavior
+#     delivery.timeout.ms: should be greater than or equal to the sum of request.timeout.ms and linger.ms.
+#     request.timeout.ms: the maximum amount of time the client will wait for the response of a request. 
+#     linger.ms: default 0
+#         Rather than immediately sending out a record the producer will wait for up to the given delay to allow other records to be sent so that the sends can be batched together. 
+#         Once we get batch.size worth of records for a partition it will be sent immediately regardless of this setting, 
+#         However if we have fewer than this many bytes accumulated for this partition 
+#         we will 'linger' for the specified time waiting for more records to show up. 
+#     batch.size: default 16384(bytes)
+#     connections.max.idle.ms: default 9 mins, close idle connections after the number of milliseconds
+#     max.in.flight.requests.per.connection   
+    consumer:
+      enable-auto-commit: false
+    listener:
+      ack-mode: MANUAL  
+          
